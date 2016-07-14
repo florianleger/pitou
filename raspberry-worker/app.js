@@ -14,7 +14,7 @@ trameEvents.on('onDecodedFrame', function (data) {
  */
 function sendData(data) {
     var options = {
-        uri: 'http://theyetifield.tk/frames/',
+        uri: 'http://theyetifield.tk:9841/frames/',
         method: 'POST',
         json: {
             frames: [data]
@@ -25,7 +25,7 @@ function sendData(data) {
         if (!error && response.statusCode == 200) {
             console.log("Frames successfully sent.");
         } else {
-            console.error('An error occurred when sending frames:', error);
+            console.error('An error occurred when sending frames:', response.statusCode, 'error: ', error);
         }
     });
 }
