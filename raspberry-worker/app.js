@@ -5,7 +5,7 @@ var request = require('request');
 var trameEvents = teleinfo.teleinfo('/dev/ttyAMA0');
 
 // Handle elec information
-trameEvents.on('tramedecodee', function (data) {
+trameEvents.on('onDecodedFrame', function (data) {
     sendData(data);
 });
 
