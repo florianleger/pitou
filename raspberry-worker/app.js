@@ -1,9 +1,10 @@
 var util = require('util');
 var teleinfo = require('./teleinfo.js');
+var request = require('request');
 
 var trameEvents = teleinfo.teleinfo('/dev/ttyAMA0');
 var dataBuffer = [];
-var TIMEOUT_EMPTY_BUFFER = 3600 * 24;
+var TIMEOUT_EMPTY_BUFFER = 60 * 30; // Send a request every 30 minutes.
 var _timeoutHandle = function(){};
 
 // Handle elec information
@@ -16,6 +17,7 @@ trameEvents.on('tramedecodee', function (data) {
         indexHC: data.HCHC,
         power: data.PAPP
     });
+    sendData(data);
 });
 
 _startTimeout();
@@ -24,10 +26,23 @@ _startTimeout();
  * Sends the buffered data to the API and empty the buffer
  */
 function sendData() {
-    // TODO: Send to the API
+    var options = {
+        uri: 'http://theyetifield.tk/frames/',
+        method: 'POST',
+        json: {
+            frames: dataBuffer
+        }
+    };
 
-    _emptyDataBuffer();
-    _resetTimeout();
+    request(options, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            console.log("Frames successfully sent.");
+            _emptyDataBuffer();
+        } else {
+            console.error('An error occurred when sending frames:', error);
+        }
+        _resetTimeout();
+    });
 }
 
 /**
@@ -35,7 +50,7 @@ function sendData() {
  */
 function _startTimeout() {
     _timeoutHandle = setTimeout(function () {
-        _emptyDataBuffer();
+        //sendData();
     }, TIMEOUT_EMPTY_BUFFER);
 }
 

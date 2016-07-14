@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "serialport": "2.0.6"
+    "serialport": "2.0.6",
+    "request": "2.73.0"
   },
   "author": "florian.leger",
   "license": "ISC"

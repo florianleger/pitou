@@ -33,7 +33,7 @@ app.post('/frames', function(req, res) {
   res.sendStatus(200);
 });
 
-app.post('/delete', function(req, res) {
+/*app.post('/delete', function(req, res) {
   _removeAllFrames(function(err) {
     if(err) {
       res.sendStatus(500);
@@ -51,5 +51,6 @@ var _removeAllFrames = function(callback) {
       }
    );
 };
+*/
 
 app.listen(9841);
