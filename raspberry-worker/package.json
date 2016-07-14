@@ -1,0 +1,14 @@
+{
+  "name": "tipi",
+  "version": "1.0.0",
+  "description": "Teleinfo on a Raspberry Pi and an external API.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "serialport": "2.0.6"
+  },
+  "author": "florian.leger",
+  "license": "ISC"
+}

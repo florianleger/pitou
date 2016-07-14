@@ -1,0 +1,8 @@
+var teleinfo = require('./teleinfo.js');
+
+var trameEvents = teleinfo.teleinfo('/dev/ttyAMA0');
+
+trameEvents.on('tramedecodee', function (data) {
+  console.log("tramedecode");
+  console.log(util.inspect(data));
+});
