@@ -27,7 +27,7 @@ function teleinfo(port) {
         frameEvents.emit('onFrame', data);
     });
 
-    frameEvents.on('frame', function (data) {
+    frameEvents.on('onFrame', function (data) {
         // Decode frame '9 lignes en tarif bleu'
         var frame = {};
         var arrayOfData = data.split('\r\n');
