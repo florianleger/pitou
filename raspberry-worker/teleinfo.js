@@ -32,7 +32,7 @@ function teleinfo(port) {
         var frame = {};
         var arrayOfData = data.split('\r\n');
         for (var i = 0; i < arrayOfData.length; i++) {
-            frame = _decodeLine(arrayOfData[i]);
+            _decodeLine(arrayOfData[i], frame);
         }
         // Incomplete frame if the first line 'ADCO' is missing
         if (!(frame['ADCO'] === undefined)) {
@@ -49,11 +49,11 @@ function teleinfo(port) {
 /**
  * Decodes the specified frame.
  * @param rawLine
+ * @param frame
  * @returns {boolean}
  * @private
  */
-function _decodeLine(rawLine) {
-    var frame = {};
+function _decodeLine(rawLine, frame) {
     var elementsLigne = rawLine.split(' ');
 
     if (elementsLigne.length === 3) {
