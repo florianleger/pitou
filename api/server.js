@@ -4,6 +4,7 @@ var MongoClient = require('mongodb').MongoClient;
 
 var app = express();
 var db;
+var _lastFrame = {};
 
 MongoClient.connect('mongodb://localhost:27017/pitou', function(err, database) {
   if (err) {
@@ -15,20 +16,24 @@ MongoClient.connect('mongodb://localhost:27017/pitou', function(err, database) {
 app.use(bodyParser.json());
 
 app.get('/', function (req, res) {
-  res.send('Welcome to Pitou API ;)\n'
-   	+'Frames:\n' + frames.toString());
+  res.send('Welcome to Pitou API ;)\n\n'
+   	+'Instant consumption: ' + _lastFrame.instantConsumption + ' W');
 });
 
 app.post('/frames', function(req, res) {
-  console.log('req.body.frames: ', req.body.frames);
   if(req.body && req.body.frames) {
     var frames = req.body.frames;
+
+    // Store frames
     db.collection('frames').insert(frames, function(err, result) {
       if (err) {
         throw err;
       }
-      console.log(result);
+      console.log("New stored frame(s).");
     });
+
+    // Keep the last frame in memory
+    _lastFrame = frames[frames.length - 1];
   }
   res.sendStatus(200);
 });
