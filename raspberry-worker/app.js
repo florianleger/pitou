@@ -37,10 +37,10 @@ function sendData(data) {
     };
 
     request(options, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
+        if (!error && response && response.statusCode == 200) {
             console.log("Frames successfully sent.");
         } else {
-            console.error('An error occurred when sending frames:', response.statusCode);
+            console.error('An error occurred when sending frames:', error);
             console.log('Retry to send them on the next request.');
             _unsentFrames = frames;
         }
