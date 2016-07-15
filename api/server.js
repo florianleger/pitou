@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 
 app.get('/', function (req, res) {
     res.send(
-        '<h2>Pitou API</h2><br><br>' +
+        '<h2>Pitou API</h2><br>' +
         '<ul><li>Instant consumption: <strong>' + _lastFrame.instantConsumption + ' W</strong></li>' +
         '<li>Peak hours index: <strong>' + _lastFrame.peakHours + ' Wh</strong></li>' +
         '<li>Off-peak hours index: <strong>' + _lastFrame.offPeakHours + ' Wh</strong></li>' +
